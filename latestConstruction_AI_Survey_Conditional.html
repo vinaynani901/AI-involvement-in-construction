@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Industry AI Survey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .form-container {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group.hidden {
+            display: none;
+        }
+        
+        label {
+            display: block;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .radio-option:hover,
+        .checkbox-option:hover {
+            background: #f5f5f5;
+        }
+        
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-top: 4px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .option-label {
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: space-between;
+        }
+        
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-reset {
+            background: #f0f0f0;
+            color: #333;
+            flex: 0 0 auto;
+        }
+        
+        .btn-reset:hover {
+            background: #e0e0e0;
+        }
+        
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #f0f0f0;
+            border-radius: 2px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn-reset {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Construction Industry AI Survey</h1>
+            <p>Help us understand construction industry challenges and the potential of AI-powered guidance systems. Takes approximately 5-7 minutes. Your honest feedback is valuable!</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                ✓ Thank you! Your response has been recorded.
+            </div>
+            
+            <form id="surveyForm">
+                <!-- SECTION 1: CORE QUESTIONS -->
+                <div class="section">
+                    <div class="section-title">Your Background & Interests</div>
+                    
+                    <div class="form-group">
+                        <label>Q1. What's your main trade? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="trade" value="Electrician" required>
+                                <span class="option-label">Electrician</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="trade" value="Carpenter">
+                                <span class="option-label">Carpenter</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="trade" value="Plumber">
+                                <span class="option-label">Plumber</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="trade" value="Bricklayer">
+                                <span class="option-label">Bricklayer</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="trade" value="Welder">
+                                <span class="option-label">Welder</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="trade" value="Concrete Finisher">
+                                <span class="option-label">Concrete Finisher</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q2. Years of experience? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="experience" value="0-2 years" required>
+                                <span class="option-label">0-2 years</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="experience" value="3-5 years">
+                                <span class="option-label">3-5 years</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="experience" value="6-10 years">
+                                <span class="option-label">6-10 years</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="experience" value="10+ years">
+                                <span class="option-label">10+ years</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q3. Project type you work on? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="projectType" value="Residential" required>
+                                <span class="option-label">Residential (houses, apartments, townhouses)</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="projectType" value="Commercial">
+                                <span class="option-label">Commercial (offices, retail stores, shopping centers)</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="projectType" value="Industrial">
+                                <span class="option-label">Industrial (factories, warehouses, facilities)</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="projectType" value="Mixed">
+                                <span class="option-label">Mixed (combination of residential, commercial, and industrial)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q4. Hours wasted weekly on non-productive tasks? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="wastedHours" value="1-2 hours" required>
+                                <span class="option-label">1-2 hours per week</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="wastedHours" value="3-5 hours">
+                                <span class="option-label">3-5 hours per week</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="wastedHours" value="6-10 hours">
+                                <span class="option-label">6-10 hours per week</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="wastedHours" value="10+ hours">
+                                <span class="option-label">More than 10 hours per week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q5. Would AI guidance help you? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelp" value="Definitely yes" required>
+                                <span class="option-label">Definitely yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelp" value="Probably yes">
+                                <span class="option-label">Probably yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelp" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelp" value="Probably not">
+                                <span class="option-label">Probably not</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelp" value="Definitely not">
+                                <span class="option-label">Definitely not</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECTION 2: ELECTRICIAN QUESTIONS -->
+                <div class="section trade-section" id="electricianSection" style="display: none;">
+                    <div class="section-title">Electrician Specific Questions</div>
+                    
+                    <div class="form-group">
+                        <label>Q6. Biggest challenge with electrical work? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="challengeE" value="Accurate wire routing and measurements">
+                                <span class="option-label">Accurate wire routing and measurements</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeE" value="Identifying hazardous areas">
+                                <span class="option-label">Identifying hazardous areas</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeE" value="Code compliance verification">
+                                <span class="option-label">Code compliance verification</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeE" value="Coordination with other trades">
+                                <span class="option-label">Coordination with other trades</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeE" value="Material planning">
+                                <span class="option-label">Material planning</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q7. What info do you wish you had on site? <span class="required">*</span></label>
+                        <textarea name="infoWishedE" placeholder="Type your answer here..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q8. Would AI guidance showing live wire routes help? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpE" value="Definitely yes">
+                                <span class="option-label">Definitely yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpE" value="Probably yes">
+                                <span class="option-label">Probably yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpE" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpE" value="Probably not">
+                                <span class="option-label">Probably not</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q9. How much faster could you work? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="speedE" value="10-15% faster">
+                                <span class="option-label">10-15% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedE" value="15-25% faster">
+                                <span class="option-label">15-25% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedE" value="25%+ faster">
+                                <span class="option-label">25%+ faster</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q10. Cost worth it ($20-50/month)? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="priceE" value="Yes">
+                                <span class="option-label">Yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceE" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceE" value="No">
+                                <span class="option-label">No</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECTION 3: CARPENTER QUESTIONS -->
+                <div class="section trade-section" id="carpenterSection" style="display: none;">
+                    <div class="section-title">Carpenter Specific Questions</div>
+                    
+                    <div class="form-group">
+                        <label>Q6. Biggest challenge with carpentry? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="challengeC" value="Accurate measurements and angles">
+                                <span class="option-label">Accurate measurements and angles</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeC" value="Material waste and planning">
+                                <span class="option-label">Material waste and planning</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeC" value="Quality control/rework">
+                                <span class="option-label">Quality control/rework</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeC" value="Reading blueprints correctly">
+                                <span class="option-label">Reading blueprints correctly</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeC" value="Coordination with trades">
+                                <span class="option-label">Coordination with trades</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q7. What info do you wish you had on site? <span class="required">*</span></label>
+                        <textarea name="infoWishedC" placeholder="Type your answer here..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q8. Would AI guidance showing measurements + angles help? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpC" value="Definitely yes">
+                                <span class="option-label">Definitely yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpC" value="Probably yes">
+                                <span class="option-label">Probably yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpC" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpC" value="Probably not">
+                                <span class="option-label">Probably not</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q9. How much faster could you work? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="speedC" value="10-15% faster">
+                                <span class="option-label">10-15% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedC" value="15-25% faster">
+                                <span class="option-label">15-25% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedC" value="25%+ faster">
+                                <span class="option-label">25%+ faster</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q10. Cost worth it ($20-50/month)? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="priceC" value="Yes">
+                                <span class="option-label">Yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceC" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceC" value="No">
+                                <span class="option-label">No</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECTION 4: PLUMBER QUESTIONS -->
+                <div class="section trade-section" id="plumberSection" style="display: none;">
+                    <div class="section-title">Plumber Specific Questions</div>
+                    
+                    <div class="form-group">
+                        <label>Q6. Biggest challenge with plumbing? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="challengeP" value="Pipe routing and measurements">
+                                <span class="option-label">Pipe routing and measurements</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeP" value="Code compliance">
+                                <span class="option-label">Code compliance</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeP" value="Finding correct layout quickly">
+                                <span class="option-label">Finding correct layout quickly</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeP" value="Coordination with other trades">
+                                <span class="option-label">Coordination with other trades</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeP" value="Material planning">
+                                <span class="option-label">Material planning</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q7. What info do you wish you had on site? <span class="required">*</span></label>
+                        <textarea name="infoWishedP" placeholder="Type your answer here..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q8. Would AI guidance showing pipe routes help? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpP" value="Definitely yes">
+                                <span class="option-label">Definitely yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpP" value="Probably yes">
+                                <span class="option-label">Probably yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpP" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpP" value="Probably not">
+                                <span class="option-label">Probably not</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q9. How much faster could you work? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="speedP" value="10-15% faster">
+                                <span class="option-label">10-15% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedP" value="15-25% faster">
+                                <span class="option-label">15-25% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedP" value="25%+ faster">
+                                <span class="option-label">25%+ faster</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q10. Cost worth it ($20-50/month)? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="priceP" value="Yes">
+                                <span class="option-label">Yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceP" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceP" value="No">
+                                <span class="option-label">No</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECTION 5: BRICKLAYER QUESTIONS -->
+                <div class="section trade-section" id="bricklayerSection" style="display: none;">
+                    <div class="section-title">Bricklayer Specific Questions</div>
+                    
+                    <div class="form-group">
+                        <label>Q6. Biggest challenge with bricklaying? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="challengeB" value="Height and alignment accuracy">
+                                <span class="option-label">Height and alignment accuracy</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeB" value="Joint spacing consistency">
+                                <span class="option-label">Joint spacing consistency</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeB" value="Material waste">
+                                <span class="option-label">Material waste</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeB" value="Quality control">
+                                <span class="option-label">Quality control</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeB" value="Weather/timing issues">
+                                <span class="option-label">Weather/timing issues</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q7. What info do you wish you had on site? <span class="required">*</span></label>
+                        <textarea name="infoWishedB" placeholder="Type your answer here..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q8. Would AI guidance showing height guides help? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpB" value="Definitely yes">
+                                <span class="option-label">Definitely yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpB" value="Probably yes">
+                                <span class="option-label">Probably yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpB" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpB" value="Probably not">
+                                <span class="option-label">Probably not</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q9. How much faster could you work? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="speedB" value="10-15% faster">
+                                <span class="option-label">10-15% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedB" value="15-25% faster">
+                                <span class="option-label">15-25% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedB" value="25%+ faster">
+                                <span class="option-label">25%+ faster</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q10. Cost worth it ($20-50/month)? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="priceB" value="Yes">
+                                <span class="option-label">Yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceB" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceB" value="No">
+                                <span class="option-label">No</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECTION 6: WELDER QUESTIONS -->
+                <div class="section trade-section" id="welderSection" style="display: none;">
+                    <div class="section-title">Welder Specific Questions</div>
+                    
+                    <div class="form-group">
+                        <label>Q6. Biggest challenge with welding? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="challengeW" value="Precise joint alignment">
+                                <span class="option-label">Precise joint alignment</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeW" value="Quality inspection">
+                                <span class="option-label">Quality inspection</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeW" value="Material planning">
+                                <span class="option-label">Material planning</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeW" value="Safety hazards">
+                                <span class="option-label">Safety hazards</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeW" value="Code compliance">
+                                <span class="option-label">Code compliance</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q7. What info do you wish you had on site? <span class="required">*</span></label>
+                        <textarea name="infoWishedW" placeholder="Type your answer here..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q8. Would AI guidance showing alignment guides help? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpW" value="Definitely yes">
+                                <span class="option-label">Definitely yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpW" value="Probably yes">
+                                <span class="option-label">Probably yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpW" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpW" value="Probably not">
+                                <span class="option-label">Probably not</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q9. How much faster could you work? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="speedW" value="10-15% faster">
+                                <span class="option-label">10-15% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedW" value="15-25% faster">
+                                <span class="option-label">15-25% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedW" value="25%+ faster">
+                                <span class="option-label">25%+ faster</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q10. Cost worth it ($20-50/month)? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="priceW" value="Yes">
+                                <span class="option-label">Yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceW" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceW" value="No">
+                                <span class="option-label">No</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECTION 7: CONCRETE FINISHER QUESTIONS -->
+                <div class="section trade-section" id="concreteSection" style="display: none;">
+                    <div class="section-title">Concrete Finisher Specific Questions</div>
+                    
+                    <div class="form-group">
+                        <label>Q6. Biggest challenge with concrete work? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="challengeCF" value="Surface levelness and finish">
+                                <span class="option-label">Surface levelness and finish</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeCF" value="Material consistency">
+                                <span class="option-label">Material consistency</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeCF" value="Timing and curing">
+                                <span class="option-label">Timing and curing</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeCF" value="Quality control">
+                                <span class="option-label">Quality control</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="challengeCF" value="Safety hazards">
+                                <span class="option-label">Safety hazards</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q7. What info do you wish you had on site? <span class="required">*</span></label>
+                        <textarea name="infoWishedCF" placeholder="Type your answer here..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q8. Would AI guidance showing level guides help? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpCF" value="Definitely yes">
+                                <span class="option-label">Definitely yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpCF" value="Probably yes">
+                                <span class="option-label">Probably yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpCF" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="aiHelpCF" value="Probably not">
+                                <span class="option-label">Probably not</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q9. How much faster could you work? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="speedCF" value="10-15% faster">
+                                <span class="option-label">10-15% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedCF" value="15-25% faster">
+                                <span class="option-label">15-25% faster</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="speedCF" value="25%+ faster">
+                                <span class="option-label">25%+ faster</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Q10. Cost worth it ($20-50/month)? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="priceCF" value="Yes">
+                                <span class="option-label">Yes</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceCF" value="Maybe">
+                                <span class="option-label">Maybe</span>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="priceCF" value="No">
+                                <span class="option-label">No</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" class="btn-submit">Submit Survey</button>
+                    <button type="reset" class="btn-reset">Clear Form</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        const form = document.getElementById('surveyForm');
+        const successMessage = document.getElementById('successMessage');
+        const tradeInput = document.querySelector('input[name="trade"]');
+        
+        // Check if all core questions are answered
+        function areAllCoreQuestionsAnswered() {
+            const trade = document.querySelector('input[name="trade"]:checked');
+            const experience = document.querySelector('input[name="experience"]:checked');
+            const projectType = document.querySelector('input[name="projectType"]:checked');
+            const wastedHours = document.querySelector('input[name="wastedHours"]:checked');
+            const aiHelp = document.querySelector('input[name="aiHelp"]:checked');
+            
+            return trade && experience && projectType && wastedHours && aiHelp;
+        }
+        
+        // Show/hide trade-specific sections based on selection
+        function updateTradeQuestions() {
+            const selectedTrade = document.querySelector('input[name="trade"]:checked');
+            
+            // Hide all trade sections
+            document.querySelectorAll('.trade-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected trade section ONLY if all core questions are answered
+            if (selectedTrade && areAllCoreQuestionsAnswered()) {
+                const tradeMap = {
+                    'Electrician': 'electricianSection',
+                    'Carpenter': 'carpenterSection',
+                    'Plumber': 'plumberSection',
+                    'Bricklayer': 'bricklayerSection',
+                    'Welder': 'welderSection',
+                    'Concrete Finisher': 'concreteSection'
+                };
+                
+                const sectionId = tradeMap[selectedTrade.value];
+                if (sectionId) {
+                    document.getElementById(sectionId).style.display = 'block';
+                    // Scroll to the trade section
+                    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+        
+        // Listen for ALL core question changes
+        document.querySelectorAll('input[name="trade"], input[name="experience"], input[name="projectType"], input[name="wastedHours"], input[name="aiHelp"]').forEach(radio => {
+            radio.addEventListener('change', updateTradeQuestions);
+        });
+        
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Log data to browser console
+            console.log('Survey Response:', data);
+            console.log(JSON.stringify(data, null, 2));
+            
+            // Show success message
+            successMessage.style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                form.reset();
+                successMessage.style.display = 'none';
+                document.querySelectorAll('.trade-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+            }, 3000);
+        });
+        
+        // Reset form handler
+        form.addEventListener('reset', function() {
+            setTimeout(() => {
+                document.querySelectorAll('.trade-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+            }, 0);
+        });
+    </script>
+</body>
+</html>
